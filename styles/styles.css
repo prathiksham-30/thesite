@@ -325,6 +325,6 @@ main .section.highlight {
 }
 
 /* Block background colors */
-body .blocks-background-color-light {
-  background-color: var(blue);
+body.block {
+  background-color: blue;
 }
