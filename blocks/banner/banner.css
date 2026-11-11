@@ -1,0 +1,22 @@
+.block.banner {
+  background-color: #0756b8;
+  color: white;
+  padding: 40px;
+  border-radius: 12px;
+}
+ 
+.block.banner h1,
+.block.banner h2,
+.block.banner p {
+  color: white;
+}
+ 
+.block.banner a {
+  display: inline-block;
+  background-color: white;
+  color: #0756b8;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
