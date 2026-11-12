@@ -326,57 +326,6 @@ function getMetadata(name, doc = document) {
   return meta || '';
 }
 
-//metadata
-async function applyMetadataSheet() {
-  // Fetch the metadata sheet JSON
-  const response = await fetch('/metadata.json');
-  const json = await response.json();
-  const rows = json.data;
-
-  // Get current page path
-  const currentPath = window.location.pathname;
-
-  // Find matching row for current page (exact match first, then wildcard)
-  const match = rows.find((row) => row.URL === currentPath)
-    || rows.find((row) => row.URL === '/**');
-
-  if (!match) return;
-
-  // Helper to set meta tag
-  function setMeta(attr, value, content) {
-    if (!content) return;
-    let meta = document.querySelector(`meta[${attr}="${value}"]`);
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute(attr, value);
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute('content', content);
-  }
-
-  // Set standard metadata
-  if (match.Title) document.title = match.Title;
-  setMeta('name', 'description', match.Description);
-  setMeta('name', 'theme', match.Theme);
-  setMeta('name', 'template', match.Template);
-  setMeta('name', 'tags', match.Tags);
-  setMeta('name', 'image', match.Image);
-
-  // Set og: tags
-  setMeta('property', 'og:title', match['og:title']);
-  setMeta('property', 'og:description', match['og:description']);
-  setMeta('property', 'og:image', match['og:image']);
-
-  // Set twitter: tags
-  setMeta('name', 'twitter:card', match['twitter:card']);
-  setMeta('name', 'twitter:title', match['twitter:title']);
-  setMeta('name', 'twitter:description', match['twitter:description']);
-  setMeta('name', 'twitter:image', match['twitter:image']);
-}
-
-// Call it on page load
-applyMetadataSheet();
-
 /**
  * Returns a picture element with webp and fallbacks
  * @param {string} src The image URL

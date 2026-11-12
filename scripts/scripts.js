@@ -12,50 +12,6 @@ import {
   buildBlock,
 } from './aem.js';
 
-async function applyMetadataSheet() {
-  const response = await fetch('/metadata.json');
-  const json = await response.json();
-  const rows = json.data;
-
-  const currentPath = window.location.pathname;
-
-  // Match exact page path first, then fallback to wildcard
-  const match = rows.find((row) => row.URL === currentPath)
-    || rows.find((row) => row.URL === '/**');
-
-  if (!match) return;
-
-  function setMeta(attr, value, content) {
-    if (!content) return;
-    let meta = document.querySelector(`meta[${attr}="${value}"]`);
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.setAttribute(attr, value);
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute('content', content);
-  }
-
-  // Standard metadata
-  if (match.Title) document.title = match.Title;
-  setMeta('name', 'description', match.Description);
-  setMeta('name', 'theme', match.Theme);
-  setMeta('name', 'template', match.Template);
-  setMeta('name', 'tags', match.Tags);
-  setMeta('name', 'image', match.Image);
-
-  // og: tags
-  setMeta('property', 'og:title', match['og:title']);
-  setMeta('property', 'og:description', match['og:description']);
-  setMeta('property', 'og:image', match['og:image']);
-
-  // twitter: tags
-  setMeta('name', 'twitter:card', match['twitter:card']);
-  setMeta('name', 'twitter:title', match['twitter:title']);
-  setMeta('name', 'twitter:description', match['twitter:description']);
-  setMeta('name', 'twitter:image', match['twitter:image']);
-}
-
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -260,4 +216,3 @@ async function loadPage() {
 }
 
 loadPage();
-applyMetadataSheet();
