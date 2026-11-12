@@ -37,3 +37,43 @@
   font-weight: bold;
   margin-left: auto;
 }
+
+/* Pagination container */
+.employee-list .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 12px;
+}
+
+/* Previous and Next buttons */
+.employee-list .pagination button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1473E6;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Disabled button style */
+.employee-list .pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Hover effect */
+.employee-list .pagination button:not(:disabled):hover {
+  background-color: #0057B7;
+}
+
+/* Page info text */
+.employee-list .pagination .page-info {
+  font-size: 14px;
+  color: #555;
+  min-width: 100px;
+  text-align: center;
+}
