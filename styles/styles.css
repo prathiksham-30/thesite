@@ -329,6 +329,10 @@ body.block {
   background-color: blue;
 }
 
+body.edsblock {
+  background-color: white;
+}
+
 main .section:nth-of-type(4) {
   background-color: lightgray;
 }
